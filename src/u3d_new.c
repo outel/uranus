@@ -15,6 +15,7 @@ U3DVector_ptr u3d_newVector(float x, float y, float z){
 	result->x = x;
 	result->y = y;
 	result->z = z;
+	result->w = 0;
 	return result;
 }
 
