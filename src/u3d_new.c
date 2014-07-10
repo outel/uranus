@@ -9,9 +9,9 @@
 
 U3DCamera_ptr u3d_newCamera(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector, float fovx, float near, float far, float view_port_width, float view_port_height){
 	U3DCamera_ptr result = (U3DCamera_ptr) malloc(sizeof(U3DCamera));
-	result->point_at = u3d_vectorCopyFromVector(u3d_utilsZeroVector(), point_at);
-	result->point_to = u3d_vectorCopyFromVector(u3d_utilsZeroVector(), point_to);
-	result->up_vector = u3d_vectorCopyFromVector(u3d_utilsZeroVector(), up_vector);
+	u3d_vectorCopyFromVector(&result->point_at, point_at);
+	u3d_vectorCopyFromVector(&result->point_to, point_to);
+	u3d_vectorCopyFromVector(&result->up_vector, up_vector);
 	result->fovx_deg = fovx;
 	result->near = near;
 	result->far = far;
@@ -19,6 +19,12 @@ U3DCamera_ptr u3d_newCamera(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVec
 	result->view_port_height = view_port_height;
 	result->aspect_ratio = view_port_width / view_port_height;
 	result->camera_matrix_invalid = result->projection_matrix_invalid = result->screen_matrix_invalid = 1;
+	return result;
+}
+
+U3DContext_ptr	u3d_makeContext(float frame_rate){
+	U3DContext_ptr result = (U3DContext_ptr) malloc(sizeof(U3DContext));
+	result->frame_rate = frame_rate;
 	return result;
 }
 
@@ -41,43 +47,44 @@ U3DMatrix_ptr u3d_newMatrix4Projection(float fovx_deg, float aspect_ratio, float
 }
 
 U3DMatrix_ptr u3d_newMatrix4Rotation(float rx_deg, float ry_deg, float rz_deg){
-	U3DMatrix_ptr result = u3d_utilsIdentityMatrix();
+	U3DMatrix_ptr result = (U3DMatrix_ptr) malloc(sizeof(U3DMatrix));
+	u3d_matrixIdentity(result);
 	
 	if(0.0 != rx_deg){
 		float rx_rad = rx_deg * DEG_2_RAD;
 		float sx = sin(rx_rad);
 		float cx = cos(rx_rad);
-		float raw_x[16] = {
+		U3DMatrix mtx_x = {
 			1.0, 0.0, 0.0, 0.0,
 			0.0, sx, -cx, 0.0,
 			0.0, cx, sx, 0.0,
 			0.0, 0.0, 0.0, 1.0
 		};
-		u3d_matrixCopyFromRawData(result, u3d_matrixMultiplicationInRawData(u3d_utilsArray4floatX(16), result->M, raw_x));
+		u3d_matrixMultiplication(result, &mtx_x);
 	}
 	if(0.0 != ry_deg){
 		float ry_rad = ry_deg * DEG_2_RAD;
 		float sy = sin(ry_rad);
 		float cy = cos(ry_rad);
-		float raw_y[16] = {
+		U3DMatrix mtx_y = {
 			sy, 0.0, cy, 0.0,
 			0.0, 1.0, 0.0, 0.0,
 			cy, 0.0, -sy, 0.0,
 			0.0, 0.0, 0.0, 1.0
 		};
-		u3d_matrixCopyFromRawData(result, u3d_matrixMultiplicationInRawData(u3d_utilsArray4floatX(16), result->M, raw_y));
+		u3d_matrixMultiplication(result, &mtx_y);
 	}
 	if(rz_deg != 0.0){
 		float rz_rad = rz_deg * DEG_2_RAD;
 		float sz = sin(rz_rad);
 		float cz = cos(rz_rad);
-		float raw_z[16] = {
+		U3DMatrix mtx_z = {
 			cz, sz, 0.0, 0.0,
 			-sz, cz, 0.0, 0.0,
 			0.0, 0.0, 1.0, 0.0,
 			0.0, 0.0, 0.0, 1.0
 		};
-		u3d_matrixCopyFromRawData(result, u3d_matrixMultiplicationInRawData(u3d_utilsArray4floatX(16), result->M, raw_z));
+		u3d_matrixMultiplication(result, &mtx_z);
 	}
 	
 	return result;
@@ -116,27 +123,30 @@ U3DMatrix_ptr u3d_newMatrix4Translation(float tx, float ty, float tz){
 }
 
 U3DMatrix_ptr u3d_newMatrix4UVN(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector){
-	U3DMatrix_ptr result = u3d_utilsZeroMatrix();
+	U3DMatrix_ptr result = (U3DMatrix_ptr) malloc(sizeof(U3DMatrix));
 	
-	U3DVector_ptr n = u3d_newVector(point_to->x - point_at->x, point_to->y - point_at->y, point_to->z - point_at->z);
-	//TODO
-	//u3d_vectorNormalize(n);
-	U3DVector_ptr u = u3d_vectorCrossProduct2Vector(u3d_utilsZeroVector(), up_vector, n);
-	//TODO
-	//u3d_vectorNormalize(u);
-	U3DVector_ptr v = u3d_vectorCrossProduct2Vector(u3d_utilsZeroVector(), n, u);
+	U3DVector n = {point_to->x - point_at->x, point_to->y - point_at->y, point_to->z - point_at->z};
+	U3DVector u;
+	U3DVector v;
+	U3DVector t = {point_at->x, point_at->y, point_at->z, 0.0};
+	U3DVector tt;
+
+	u3d_vectorNormalize(&n);
+
+	u3d_vectorCrossProduct2Vector(&u, up_vector, &n);
+	u3d_vectorNormalize(&u);
+
+	u3d_vectorCrossProduct2Vector(&v, &n, &u);
 	
-	U3DVector_ptr t = u3d_newVector(point_at->x, point_at->y, point_at->z);
-	float tx = -u3d_vectorDotProduct(t, u);
-	float ty = -u3d_vectorDotProduct(t, v);
-	float tz = -u3d_vectorDotProduct(t, n);
-	U3DVector_ptr tt = u3d_newVector(tx, ty, tz);
-	tt->w = 1;
+	tt.x = -u3d_vectorDotProduct(&t, &u);
+	tt.y = -u3d_vectorDotProduct(&t, &v);
+	tt.z = -u3d_vectorDotProduct(&t, &n);
+	tt.w = 1.0;
 	
-	u3d_matrixCopyColumnFromVector(result, 0, u);
-	u3d_matrixCopyColumnFromVector(result, 1, v);
-	u3d_matrixCopyColumnFromVector(result, 2, n);
-	u3d_matrixCopyRowFromVector(result, 3, tt);
+	u3d_matrixCopyColumnFromVector(result, 0, &u);
+	u3d_matrixCopyColumnFromVector(result, 1, &v);
+	u3d_matrixCopyColumnFromVector(result, 2, &n);
+	u3d_matrixCopyRowFromVector(result, 3, &tt);
 	
 	return result;
 }
@@ -146,7 +156,7 @@ U3DVector_ptr u3d_newVector(float x, float y, float z){
 	result->x = x;
 	result->y = y;
 	result->z = z;
-	result->w = 0;
+	result->w = 0.0;
 	return result;
 }
 
@@ -155,6 +165,6 @@ U3DPoint_ptr u3d_newPoint(float x, float y, float z){
 	result->x = x;
 	result->y = y;
 	result->z = z;
-	result->w = 1;
+	result->w = 1.0;
 	return result;
 }
