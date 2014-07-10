@@ -1,0 +1,15 @@
+toolsets = vs2012;
+win32-subsystem = console;
+win32-unicode = false;
+
+
+program main {
+	sources { 
+		src/main.c
+		src/u3d_camera.c
+		src/u3d_matrix.c
+		src/u3d_new.c
+		src/u3d_utils.c
+		src/u3d_vector.c
+	}
+}

@@ -1,4 +1,10 @@
+/Debug/
 /.tags*
+/cscope.out
+/*.vcxproj
+/*.vcxproj.filters
+/*.sln
+/*sublime*
 
 # Object files
 *.o
