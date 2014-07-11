@@ -1,3 +1,4 @@
+#include <math.h>
 #include "u3d_make.h"
 #include "u3d_const.h"
 
