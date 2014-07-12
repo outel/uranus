@@ -1,4 +1,4 @@
-#ifndef U3D_UTILS_H
+﻿#ifndef U3D_UTILS_H
 #define U3D_UTILS_H
 
 #include <stdlib.h>

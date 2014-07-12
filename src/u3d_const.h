@@ -1,4 +1,4 @@
-#ifndef DEG_2_RAD
+﻿#ifndef DEG_2_RAD
 #define DEG_2_RAD  0.01745329252f
 #endif
 

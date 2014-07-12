@@ -1,4 +1,4 @@
-#include "u3d_matrix.h"
+﻿#include "u3d_matrix.h"
 
 void u3d_matrixCopyColumnFromRawData(U3DMatrix_ptr dst, unsigned column, float src_raw_data[4]){
 	dst->RC[0][column] = src_raw_data[0];

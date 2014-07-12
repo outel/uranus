@@ -1,4 +1,4 @@
-#ifndef U3D_CAMERA_H
+﻿#ifndef U3D_CAMERA_H
 #define U3D_CAMERA_H
 
 #include "u3d_vector.h"

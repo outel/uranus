@@ -1,4 +1,4 @@
-#include <math.h>
+﻿#include <math.h>
 
 #include "u3d_vector.h"
 

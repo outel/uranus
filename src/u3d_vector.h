@@ -1,4 +1,4 @@
-#ifndef U3D_VECTOR_H
+﻿#ifndef U3D_VECTOR_H
 #define U3D_VECTOR_H
 
 typedef struct _U3DVector {
