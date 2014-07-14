@@ -5,14 +5,15 @@
 #include "u3d_matrix.h"
 
 
+
 typedef struct _U3DCamera {
 	U3DPoint	point_at;
 	U3DPoint	point_to;
 	U3DVector	up_vector;
 
 	float		fovx_deg;
-	float		near;
-	float		far;
+	float		near_clip_plane;
+	float		far_clip_plane;
 	float		view_port_width;
 	float		view_port_height;
 	float		aspect_ratio;
@@ -39,6 +40,5 @@ void u3d_cameraExportMatrix4Screen(U3DCamera_ptr camera);
 void u3d_cameraResetViewPort(U3DCamera_ptr camera, float view_port_width, float view_port_height);
 void u3d_cameraRotation(U3DCamera_ptr camera, float rx_deg, float ry_deg, float rz_deg);
 void u3d_cameraTranslation(U3DCamera_ptr camera, float tx, float ty, float tz);
-
 
 #endif

@@ -3,6 +3,7 @@
 #include "u3d_make.h"
 
 
+
 void u3d_cameraExportMatrix4Camera(U3DCamera_ptr camera){
 	if(0 < camera->camera_matrix_invalid){
 		U3DMatrix temp;
@@ -20,7 +21,7 @@ void u3d_cameraExportMatrix4Camera(U3DCamera_ptr camera){
 
 void u3d_cameraExportMatrix4Projection(U3DCamera_ptr camera){
 	if(0 < camera->projection_matrix_invalid){
-		u3d_makeMatrix4Projection(&camera->projection_matrix, camera->fovx_deg, camera->aspect_ratio, camera->near, camera->far);
+		u3d_makeMatrix4Projection(&camera->projection_matrix, camera->fovx_deg, camera->aspect_ratio, camera->near_clip_plane, camera->far_clip_plane);
 		
 		camera->projection_matrix_invalid = 0;
 	}

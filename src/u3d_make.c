@@ -1,19 +1,27 @@
 ﻿#include <math.h>
-#include "u3d_make.h"
+
 #include "u3d_const.h"
+#include "u3d_context.h"
+#include "u3d_make.h"
+
+
+void u3d_makeContext(U3DContext_ptr target, float cumulative_time, float frame_rate){
+	target->cumulative_time = cumulative_time;
+	target->frame_rate = frame_rate;
+}
 
 void u3d_makeMatrix(U3DMatrix_ptr target, float src_raw_data[16]){
 	u3d_matrixCopyFromRawData(target, src_raw_data);
 }
 
-void u3d_makeMatrix4Projection(U3DMatrix_ptr target, float fovx_deg, float aspect_ratio, float near, float far){
+void u3d_makeMatrix4Projection(U3DMatrix_ptr target, float fovx_deg, float aspect_ratio, float near_clip_plane, float far_clip_plane){
 	float zoom_x = 1.0 / tan(fovx_deg * DEG_2_RAD / 2.0);
 	float zoom_y = aspect_ratio * zoom_x;
 	float temp[16] = {
 		zoom_x, 0.0, 0.0, 0.0,
 		0.0, zoom_y, 0.0, 0.0,
-		0.0, 0.0, (far + near)/(far - near), 1.0,
-		0.0, 0.0, (-2.0 * far * near)/(far - near), 0.0
+		0.0, 0.0, (far_clip_plane + near_clip_plane)/(far_clip_plane - near_clip_plane), 1.0,
+		0.0, 0.0, (-2.0 * far_clip_plane * near_clip_plane)/(far_clip_plane - near_clip_plane), 0.0
 	};
 	u3d_matrixCopyFromRawData(target, temp);
 }

@@ -7,7 +7,7 @@
 #include "u3d_context.h"
 
 
-U3DCamera_ptr	u3d_newCamera(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector, float fovx, float near, float far, float view_port_width, float view_port_height);
+U3DCamera_ptr	u3d_newCamera(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector, float fovx, float near_clip_plane, float far_clip_plane, float view_port_width, float view_port_height);
 U3DContext_ptr	u3d_newContext(float frame_rate);
 U3DMatrix_ptr	u3d_newMatrix(float raw_data[16]);
 U3DMatrix_ptr	u3d_newMatrix4Projection(float fovx_deg, float aspect_ratio, float near, float far);

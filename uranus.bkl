@@ -2,17 +2,18 @@ toolsets = vs2012;
 win32-subsystem = windows;
 win32-unicode = true;
 
-
 program main {
-	sources {
-		src/platform/u3d_windows.c
+	libs += d2d1;
 
+	sources {
+		src/platform/u3d_windows.cpp
 		
 		src/u3d_camera.c
+		src/u3d_context.c
+		src/u3d_make.c
 		src/u3d_matrix.c
 		src/u3d_new.c
 		src/u3d_utils.c
 		src/u3d_vector.c
-		src/u3d_make.c
 	}
 }

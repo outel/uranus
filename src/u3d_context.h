@@ -16,7 +16,7 @@ typedef struct _U3DContext {
 	//head:S3DDisplayObject;
 } U3DContext, *U3DContext_ptr;
 
-
+void s3d_contextRenderWire(U3DContext_ptr context, unsigned start_triangle, unsigned count_triangle);
 
 
 #endif

@@ -7,14 +7,14 @@
 #include "u3d_const.h"
 
 
-U3DCamera_ptr u3d_newCamera(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector, float fovx, float near, float far, float view_port_width, float view_port_height){
+U3DCamera_ptr u3d_newCamera(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector, float fovx, float near_clip_plane, float far_clip_plane, float view_port_width, float view_port_height){
 	U3DCamera_ptr result = (U3DCamera_ptr) malloc(sizeof(U3DCamera));
 	u3d_vectorCopyFromVector(&result->point_at, point_at);
 	u3d_vectorCopyFromVector(&result->point_to, point_to);
 	u3d_vectorCopyFromVector(&result->up_vector, up_vector);
 	result->fovx_deg = fovx;
-	result->near = near;
-	result->far = far;
+	result->near_clip_plane = near_clip_plane;
+	result->far_clip_plane = far_clip_plane;
 	result->view_port_width = view_port_width;
 	result->view_port_height = view_port_height;
 	result->aspect_ratio = view_port_width / view_port_height;
@@ -22,7 +22,7 @@ U3DCamera_ptr u3d_newCamera(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVec
 	return result;
 }
 
-U3DContext_ptr	u3d_makeContext(float frame_rate){
+U3DContext_ptr	u3d_newContext(float frame_rate){
 	U3DContext_ptr result = (U3DContext_ptr) malloc(sizeof(U3DContext));
 	result->frame_rate = frame_rate;
 	return result;
@@ -34,14 +34,14 @@ U3DMatrix_ptr u3d_newMatrix(float raw_data[16]){
 	return result;
 }
 
-U3DMatrix_ptr u3d_newMatrix4Projection(float fovx_deg, float aspect_ratio, float near, float far){
+U3DMatrix_ptr u3d_newMatrix4Projection(float fovx_deg, float aspect_ratio, float near_clip_plane, float far_clip_plane){
 	float zoom_x = 1.0 / tan(fovx_deg * DEG_2_RAD / 2.0);
 	float zoom_y = aspect_ratio * zoom_x;
 	float temp[16] = {
 		zoom_x, 0.0, 0.0, 0.0,
 		0.0, zoom_y, 0.0, 0.0,
-		0.0, 0.0, (far + near)/(far - near), 1.0,
-		0.0, 0.0, (-2.0 * far * near)/(far - near), 0.0
+		0.0, 0.0, (far_clip_plane + near_clip_plane)/(far_clip_plane - near_clip_plane), 1.0,
+		0.0, 0.0, (-2.0 * far_clip_plane * near_clip_plane)/(far_clip_plane - near_clip_plane), 0.0
 	};
 	return u3d_newMatrix(temp);
 }
