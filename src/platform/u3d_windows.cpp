@@ -128,6 +128,7 @@ LRESULT CALLBACK windowHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				}
 			break;
 		case WM_PAINT:
+			if(pRT != 0){
 			pRT->BeginDraw();
 
 			pRT->DrawRectangle(
@@ -138,7 +139,10 @@ LRESULT CALLBACK windowHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 					rc.bottom - 100.0f),
 					pBlackBrush);
 
-			hr = pRT->EndDraw();
+			hr = pRT->EndDraw();			
+			}
+
+
 			break;
 		case WM_DESTROY:
 			PostQuitMessage(0);
