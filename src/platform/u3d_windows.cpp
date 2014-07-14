@@ -7,6 +7,9 @@ ID2D1Factory *pD2DFactory;
 ID2D1HwndRenderTarget *pRT;
 ID2D1SolidColorBrush *pBlackBrush;
 RECT rc;
+
+U3DContext context;
+
 TCHAR szTitle[MAX_LOADSTRING];
 TCHAR szWindowClass[MAX_LOADSTRING];
 
@@ -18,10 +21,18 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 					_In_opt_ HINSTANCE hPrevInstance,
 					_In_ LPTSTR    lpCmdLine,
 					_In_ int       nCmdShow){
-	U3DContext v;
+	
+	U3DPoint point_at = {0.0f, 0.0f, 0.0f, 1.0f};
+	U3DPoint point_to = {0.0f, 0.0f, 1.0f, 1.0f};
+	U3DVector up_vector = {0.0f, 1.0f, 0.0f, 0.0f};
 	MSG msg;
 	HRESULT hr;
 	FILE *f;
+
+	u3d_makeContext(&context, 0.0f, 1.0f / 24.0f);
+	u3d_makeCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 400, 400);
+
+	u3d_cameraExportMatrix4Camera(&context.camera);
 
 	AllocConsole();
 	f = freopen("CONOUT$", "w+t", stdout);
@@ -129,20 +140,18 @@ LRESULT CALLBACK windowHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			break;
 		case WM_PAINT:
 			if(pRT != 0){
-			pRT->BeginDraw();
+				pRT->BeginDraw();
 
-			pRT->DrawRectangle(
-				D2D1::RectF(
-					rc.left + 100.0f,
-					rc.top + 100.0f,
-					rc.right - 100.0f,
-					rc.bottom - 100.0f),
-					pBlackBrush);
+				pRT->DrawRectangle(
+					D2D1::RectF(
+						rc.left + 100.0f,
+						rc.top + 100.0f,
+						rc.right - 100.0f,
+						rc.bottom - 100.0f),
+						pBlackBrush);
 
-			hr = pRT->EndDraw();			
+				hr = pRT->EndDraw();			
 			}
-
-
 			break;
 		case WM_DESTROY:
 			PostQuitMessage(0);

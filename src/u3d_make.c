@@ -5,6 +5,19 @@
 #include "u3d_make.h"
 
 
+void u3d_makeCamera(U3DCamera_ptr target, U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector, float fovx, float near_clip_plane, float far_clip_plane, float view_port_width, float view_port_height){
+	u3d_vectorCopyFromVector(&target->point_at, point_at);
+	u3d_vectorCopyFromVector(&target->point_to, point_to);
+	u3d_vectorCopyFromVector(&target->up_vector, up_vector);
+	target->fovx_deg = fovx;
+	target->near_clip_plane = near_clip_plane;
+	target->far_clip_plane = far_clip_plane;
+	target->view_port_width = view_port_width;
+	target->view_port_height = view_port_height;
+	target->aspect_ratio = view_port_width / view_port_height;
+	target->camera_matrix_invalid = target->projection_matrix_invalid = target->screen_matrix_invalid = 1;
+}
+
 void u3d_makeContext(U3DContext_ptr target, float cumulative_time, float frame_rate){
 	target->cumulative_time = cumulative_time;
 	target->frame_rate = frame_rate;

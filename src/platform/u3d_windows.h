@@ -14,6 +14,11 @@
 #include <d2d1_1.h>
 
 
+
+
+extern "C" {
 #include "../u3d_context.h"
+#include "../u3d_make.h"
+}
 
 #define MAX_LOADSTRING 100
