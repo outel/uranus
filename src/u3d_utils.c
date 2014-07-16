@@ -3,7 +3,7 @@
 #include "u3d_new.h"
 #include "u3d_utils.h"
 
-void u3d_utilsBatchMatrixMultiplication(float *dst_vertex_raw_data, float *src_vertex_raw_data, unsigned src_vertex_len, float * matrix_raw_data, unsigned vertex_wide){
+void u3d_utilsBatchMatrixMultiplication(number *dst_vertex_raw_data, number *src_vertex_raw_data, unsigned src_vertex_len, number * matrix_raw_data, unsigned vertex_wide){
 	unsigned step = vertex_wide * 4;
 
 	unsigned row00, row01, row02, row03;
@@ -11,7 +11,7 @@ void u3d_utilsBatchMatrixMultiplication(float *dst_vertex_raw_data, float *src_v
 	unsigned row20, row21, row22, row23;
 	unsigned row30, row31, row32, row33;
 
-	float dst[16];
+	number dst[16];
 	unsigned i;
 	for (i = 0; i < src_vertex_len; i += step) {
 		row00 = i + 0 * vertex_wide + 0;
@@ -77,7 +77,7 @@ void u3d_utilsBatchMatrixMultiplication(float *dst_vertex_raw_data, float *src_v
 	}
 }
 
-void u3d_utilsPerspectiveDivision(float * target, unsigned target_len, unsigned vertex_wide){
+void u3d_utilsPerspectiveDivision(number * target, unsigned target_len, unsigned vertex_wide){
 	unsigned i;
 	for (i = 0; i < target_len; i += vertex_wide) {
 		target[i + 0] /= target[i + 3];

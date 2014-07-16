@@ -35,7 +35,7 @@ void u3d_cameraExportMatrix4Screen(U3DCamera_ptr camera){
 	}
 }
 
-void u3d_cameraResetViewPort(U3DCamera_ptr camera, float view_port_width, float view_port_height){
+void u3d_cameraResetViewPort(U3DCamera_ptr camera, number view_port_width, number view_port_height){
 	camera->view_port_width = view_port_width;
 	camera->view_port_height = view_port_height;
 	camera->aspect_ratio = view_port_width / view_port_height;
@@ -43,7 +43,7 @@ void u3d_cameraResetViewPort(U3DCamera_ptr camera, float view_port_width, float 
 	camera->projection_matrix_invalid = camera->screen_matrix_invalid = 1;
 }
 
-void u3d_cameraRotation(U3DCamera_ptr camera, float rx_deg, float ry_deg, float rz_deg){
+void u3d_cameraRotation(U3DCamera_ptr camera, number rx_deg, number ry_deg, number rz_deg){
 	camera->rx_deg = -rx_deg;
 	camera->ry_deg = -ry_deg;
 	camera->rz_deg = -rz_deg;
@@ -51,7 +51,7 @@ void u3d_cameraRotation(U3DCamera_ptr camera, float rx_deg, float ry_deg, float 
 	camera->camera_matrix_invalid = 1;
 }
 
-void u3d_cameraTranslation(U3DCamera_ptr camera, float tx, float ty, float tz){
+void u3d_cameraTranslation(U3DCamera_ptr camera, number tx, number ty, number tz){
 	camera->tx = -tx;
 	camera->ty = -ty;
 	camera->tz = -tz;

@@ -2,12 +2,13 @@
 #define U3D_CONTEXT_H
 
 #include "u3d_camera.h"
+#include "u3d_setup.h"
 
 typedef struct _U3DContext {
 	unsigned render_type;
 		
-	float cumulative_time;
-	float frame_rate;
+	number cumulative_time;
+	number frame_rate;
 	
 	//graphics:Graphics;
 

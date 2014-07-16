@@ -1,6 +1,6 @@
 ﻿#include "u3d_matrix.h"
 
-void u3d_matrixCopyColumnFromRawData(U3DMatrix_ptr dst, unsigned column, float src_raw_data[4]){
+void u3d_matrixCopyColumnFromRawData(U3DMatrix_ptr dst, unsigned column, number src_raw_data[4]){
 	dst->RC[0][column] = src_raw_data[0];
 	dst->RC[1][column] = src_raw_data[1];
 	dst->RC[2][column] = src_raw_data[2];
@@ -11,7 +11,7 @@ void u3d_matrixCopyColumnFromVector(U3DMatrix_ptr dst, unsigned column, U3DVecto
 	u3d_matrixCopyColumnFromRawData(dst, column, src->V);
 }
 
-void u3d_matrixCopyColumnToRawData(float dst_raw_data[4], unsigned column, U3DMatrix_ptr src){
+void u3d_matrixCopyColumnToRawData(number dst_raw_data[4], unsigned column, U3DMatrix_ptr src){
 	dst_raw_data[0] = src->RC[0][column];
 	dst_raw_data[1] = src->RC[1][column];
 	dst_raw_data[2] = src->RC[2][column];
@@ -26,7 +26,7 @@ void u3d_matrixCopyFromMatrix(U3DMatrix_ptr dst, U3DMatrix_ptr src){
 	u3d_matrixCopyFromRawData(dst, src->M);
 }
 
-void u3d_matrixCopyFromRawData(U3DMatrix_ptr dst, float src_raw_data[16]){
+void u3d_matrixCopyFromRawData(U3DMatrix_ptr dst, number src_raw_data[16]){
 	dst->M[0] = src_raw_data[0];
 	dst->M[1] = src_raw_data[1];
 	dst->M[2] = src_raw_data[2];
@@ -45,7 +45,7 @@ void u3d_matrixCopyFromRawData(U3DMatrix_ptr dst, float src_raw_data[16]){
 	dst->M[15] = src_raw_data[15];
 }
 
-void u3d_matrixCopyRowFromRawData(U3DMatrix_ptr dst, unsigned row, float src_raw_data[4]){
+void u3d_matrixCopyRowFromRawData(U3DMatrix_ptr dst, unsigned row, number src_raw_data[4]){
 	dst->RC[row][0] = src_raw_data[0];
 	dst->RC[row][1] = src_raw_data[1];
 	dst->RC[row][2] = src_raw_data[2];
@@ -56,7 +56,7 @@ void u3d_matrixCopyRowFromVector(U3DMatrix_ptr dst, unsigned row, U3DVector_ptr 
 	u3d_matrixCopyRowFromRawData(dst, row, src->V);
 }
 
-void u3d_matrixCopyRowToRawData(float dst_raw_data[4], unsigned row, U3DMatrix_ptr src){
+void u3d_matrixCopyRowToRawData(number dst_raw_data[4], unsigned row, U3DMatrix_ptr src){
 	dst_raw_data[0] = src->RC[row][0];
 	dst_raw_data[1] = src->RC[row][1];
 	dst_raw_data[2] = src->RC[row][2];
@@ -120,7 +120,7 @@ void u3d_matrixMultiplication2Matrix(U3DMatrix_ptr dst, U3DMatrix_ptr left, U3DM
 	dst->M33 = left->M30 * right->M03 + left->M31 * right->M13 + left->M32 * right->M23 + left->M33 * right->M33;
 }
 
-void u3d_matrixMultiplicationInRawData(float dst_raw_data[16], float left_raw_data[16], float right_raw_data[16]){
+void u3d_matrixMultiplicationInRawData(number dst_raw_data[16], number left_raw_data[16], number right_raw_data[16]){
 	dst_raw_data[0] = left_raw_data[0] * right_raw_data[0] + left_raw_data[1] * right_raw_data[4] + left_raw_data[2] * right_raw_data[8] + left_raw_data[3] * right_raw_data[12];
 	dst_raw_data[1] = left_raw_data[0] * right_raw_data[1] + left_raw_data[1] * right_raw_data[5] + left_raw_data[2] * right_raw_data[9] + left_raw_data[3] * right_raw_data[13];
 	dst_raw_data[2] = left_raw_data[0] * right_raw_data[2] + left_raw_data[1] * right_raw_data[6] + left_raw_data[2] * right_raw_data[10] + left_raw_data[3] * right_raw_data[14];
@@ -173,7 +173,7 @@ void u3d_matrixTranspose2Matrix(U3DMatrix_ptr dst, U3DMatrix_ptr src){
 	dst->M32 = src->M23;
 }
 
-void u3d_matrixTransposeInRawData(float dst_raw_data[16], float src_raw_data[16]){
+void u3d_matrixTransposeInRawData(number dst_raw_data[16], number src_raw_data[16]){
 	dst_raw_data[0] = src_raw_data[0];
 	dst_raw_data[5] = src_raw_data[5];
 	dst_raw_data[10] = src_raw_data[10];
