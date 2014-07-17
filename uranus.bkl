@@ -6,10 +6,11 @@ program main {
 	libs += d2d1;
 
 	sources {
-		src/platform/u3d_windows.cpp
+		src/win/u3d_platform.cpp
 		
 		src/u3d_camera.c
 		src/u3d_context.c
+		src/u3d_list.c
 		src/u3d_make.c
 		src/u3d_matrix.c
 		src/u3d_new.c

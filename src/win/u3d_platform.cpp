@@ -1,4 +1,4 @@
-﻿#include "u3d_windows.h"
+#include "u3d_platform.h"
 
 HINSTANCE hInst;
 HWND hWnd;
@@ -21,7 +21,6 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 					_In_opt_ HINSTANCE hPrevInstance,
 					_In_ LPTSTR    lpCmdLine,
 					_In_ int       nCmdShow){
-	
 	U3DPoint point_at = {0.0f, 0.0f, 0.0f, 1.0f};
 	U3DPoint point_to = {0.0f, 0.0f, 1.0f, 1.0f};
 	U3DVector up_vector = {0.0f, 1.0f, 0.0f, 0.0f};
@@ -31,6 +30,11 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	u3d_makeContext(&context, 0.0f, 1.0f / 24.0f);
 	u3d_makeCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 400, 400);
+	u3d_makeList(&context.display_list);
+
+	u3d_listAddNode(&context.display_list, NULL);
+	u3d_listAddNode(&context.display_list, NULL);
+	u3d_listAddNode(&context.display_list, NULL);
 
 	u3d_cameraExportMatrix4Camera(&context.camera);
 
@@ -80,6 +84,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+	
 	fclose(f);
 	FreeConsole();
 	pRT->Release();

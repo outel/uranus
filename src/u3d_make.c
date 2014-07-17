@@ -136,3 +136,8 @@ void u3d_makeMatrix4UVN(U3DMatrix_ptr result, U3DPoint_ptr point_at, U3DPoint_pt
 	u3d_matrixCopyColumnFromVector(result, 2, &n);
 	u3d_matrixCopyRowFromVector(result, 3, &tt);
 }
+
+void u3d_makeList(U3DNode_ptr target){
+	target->pre = target;
+	target->nxt = target;
+}

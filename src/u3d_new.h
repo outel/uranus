@@ -7,6 +7,7 @@
 #include "u3d_vector.h"
 #include "u3d_camera.h"
 #include "u3d_context.h"
+#include "u3d_list.h"
 
 
 U3DCamera_ptr	u3d_newCamera(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector, number fovx, number near_clip_plane, number far_clip_plane, number view_port_width, number view_port_height);
@@ -20,6 +21,8 @@ U3DMatrix_ptr	u3d_newMatrix4Translation(number tx, number ty, number tz);
 U3DMatrix_ptr	u3d_newMatrix4UVN(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector);
 U3DVector_ptr	u3d_newVector(number x, number y, number z);
 U3DPoint_ptr	u3d_newPoint(number x, number y, number z);
+U3DNode_ptr		u3d_newList();
+U3DNode_ptr		u3d_newNode();
 
 
 #endif

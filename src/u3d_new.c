@@ -168,3 +168,14 @@ U3DPoint_ptr u3d_newPoint(number x, number y, number z){
 	result->w = 1.0;
 	return result;
 }
+
+U3DNode_ptr	u3d_newList(){
+	U3DNode_ptr result = (U3DNode_ptr) malloc(sizeof(U3DNode));
+	result->pre = result;
+	result->nxt = result;
+	return result;
+}
+
+U3DNode_ptr	u3d_newNode(){
+	return (U3DNode_ptr) malloc(sizeof(U3DNode));
+}
