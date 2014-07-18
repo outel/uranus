@@ -10,15 +10,12 @@
 #include <tchar.h>
 #include <wchar.h>
 
-#include <d2d1.h>
-#include <d2d1_1.h>
-
-
-
-
 extern "C" {
 #include "../u3d_context.h"
 #include "../u3d_make.h"
+#include "../u3d_setup.h"
 }
+
+#include "u3d_render.h"
 
 #define MAX_LOADSTRING 100
