@@ -32,7 +32,14 @@ void u3d_renderInit(HWND hWnd){
 	}
 }
 
-void u3d_renderDrawLine(){
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+	void u3d_renderDrawLine(){
+	}
+	
+#ifdef __cplusplus
 }
+#endif
 
