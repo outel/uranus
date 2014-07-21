@@ -7,14 +7,15 @@
 #include <d2d1_1.h>
 
 
-void u3d_renderInit(HWND hWnd);
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-	void u3d_renderDrawLine();
-	
+
+void u3d_renderInit(HWND hWnd);
+void u3d_renderDrawLine(float p0x, float p0y, float p1x, float p1y);
+
+
 #ifdef __cplusplus
 }
 #endif

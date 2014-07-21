@@ -10,12 +10,19 @@
 #include <tchar.h>
 #include <wchar.h>
 
+#include "u3d_render.h"
+
+#ifdef __cplusplus
 extern "C" {
+#endif
+
+
 #include "../u3d_context.h"
 #include "../u3d_make.h"
-#include "../u3d_setup.h"
-}
 
-#include "u3d_render.h"
+
+#ifdef __cplusplus
+}
+#endif
 
 #define MAX_LOADSTRING 100

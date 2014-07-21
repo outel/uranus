@@ -16,7 +16,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 					_In_opt_ HINSTANCE hPrevInstance,
 					_In_ LPTSTR    lpCmdLine,
 					_In_ int       nCmdShow){
-	number box[] = {
+	float box[] = {
 		1, 1, 1, 1,
 		1, -1, 1, 1,
 		-1, -1, 1, 1,
@@ -110,7 +110,6 @@ BOOL instanceWindow(HINSTANCE hInstance, int nCmdShow){
 
 LRESULT CALLBACK windowHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 	int wmId, wmEvent;
-	HRESULT hr;
 
 	switch (message){
 		case WM_COMMAND:

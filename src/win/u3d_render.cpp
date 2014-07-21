@@ -1,5 +1,10 @@
 #include "u3d_render.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 static ID2D1Factory *d2dFactory;
 static ID2D1HwndRenderTarget *render_target;
 static ID2D1SolidColorBrush *black_brush;
@@ -32,14 +37,18 @@ void u3d_renderInit(HWND hWnd){
 	}
 }
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+void u3d_renderDrawLine(float p0x, float p0y, float p1x, float p1y){
+	D2D1_POINT_2F p0 = {p0x, p0y};
+	D2D1_POINT_2F p1 = {p1x, p1y};
 
-	void u3d_renderDrawLine(){
-	}
-	
+	render_target->BeginDraw();
+
+	render_target->DrawLine(p0, p1, black_brush, 0.1f);
+
+	render_target->EndDraw();
+}
+
+
 #ifdef __cplusplus
 }
 #endif
-

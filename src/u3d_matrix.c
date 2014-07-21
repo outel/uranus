@@ -1,6 +1,7 @@
 ﻿#include "u3d_matrix.h"
+#include "u3d_setup.h"
 
-void u3d_matrixCopyColumnFromRawData(U3DMatrix_ptr dst, unsigned column, number src_raw_data[4]){
+void u3d_matrixCopyColumnFromRawData(U3DMatrix_ptr dst, unsigned column, float src_raw_data[4]){
 	dst->RC[0][column] = src_raw_data[0];
 	dst->RC[1][column] = src_raw_data[1];
 	dst->RC[2][column] = src_raw_data[2];
@@ -11,7 +12,7 @@ void u3d_matrixCopyColumnFromVector(U3DMatrix_ptr dst, unsigned column, U3DVecto
 	u3d_matrixCopyColumnFromRawData(dst, column, src->V);
 }
 
-void u3d_matrixCopyColumnToRawData(number dst_raw_data[4], unsigned column, U3DMatrix_ptr src){
+void u3d_matrixCopyColumnToRawData(float dst_raw_data[4], unsigned column, U3DMatrix_ptr src){
 	dst_raw_data[0] = src->RC[0][column];
 	dst_raw_data[1] = src->RC[1][column];
 	dst_raw_data[2] = src->RC[2][column];
@@ -26,26 +27,26 @@ void u3d_matrixCopyFromMatrix(U3DMatrix_ptr dst, U3DMatrix_ptr src){
 	u3d_matrixCopyFromRawData(dst, src->M);
 }
 
-void u3d_matrixCopyFromRawData(U3DMatrix_ptr dst, number src_raw_data[16]){
-	dst->M[0] = src_raw_data[0];
-	dst->M[1] = src_raw_data[1];
-	dst->M[2] = src_raw_data[2];
-	dst->M[3] = src_raw_data[3];
-	dst->M[4] = src_raw_data[4];
-	dst->M[5] = src_raw_data[5];
-	dst->M[6] = src_raw_data[6];
-	dst->M[7] = src_raw_data[7];
-	dst->M[8] = src_raw_data[8];
-	dst->M[9] = src_raw_data[9];
-	dst->M[10] = src_raw_data[10];
-	dst->M[11] = src_raw_data[11];
-	dst->M[12] = src_raw_data[12];
-	dst->M[13] = src_raw_data[13];
-	dst->M[14] = src_raw_data[14];
-	dst->M[15] = src_raw_data[15];
+void u3d_matrixCopyFromRawData(U3DMatrix_ptr dst, float src_raw_data[16]){
+	dst->M[RC00] = src_raw_data[RC00];
+	dst->M[RC01] = src_raw_data[RC01];
+	dst->M[RC02] = src_raw_data[RC02];
+	dst->M[RC03] = src_raw_data[RC03];
+	dst->M[RC10] = src_raw_data[RC10];
+	dst->M[RC11] = src_raw_data[RC11];
+	dst->M[RC12] = src_raw_data[RC12];
+	dst->M[RC13] = src_raw_data[RC13];
+	dst->M[RC20] = src_raw_data[RC20];
+	dst->M[RC21] = src_raw_data[RC21];
+	dst->M[RC22] = src_raw_data[RC22];
+	dst->M[RC23] = src_raw_data[RC23];
+	dst->M[RC30] = src_raw_data[RC30];
+	dst->M[RC31] = src_raw_data[RC31];
+	dst->M[RC32] = src_raw_data[RC32];
+	dst->M[RC33] = src_raw_data[RC33];
 }
 
-void u3d_matrixCopyRowFromRawData(U3DMatrix_ptr dst, unsigned row, number src_raw_data[4]){
+void u3d_matrixCopyRowFromRawData(U3DMatrix_ptr dst, unsigned row, float src_raw_data[4]){
 	dst->RC[row][0] = src_raw_data[0];
 	dst->RC[row][1] = src_raw_data[1];
 	dst->RC[row][2] = src_raw_data[2];
@@ -56,7 +57,7 @@ void u3d_matrixCopyRowFromVector(U3DMatrix_ptr dst, unsigned row, U3DVector_ptr 
 	u3d_matrixCopyRowFromRawData(dst, row, src->V);
 }
 
-void u3d_matrixCopyRowToRawData(number dst_raw_data[4], unsigned row, U3DMatrix_ptr src){
+void u3d_matrixCopyRowToRawData(float dst_raw_data[4], unsigned row, U3DMatrix_ptr src){
 	dst_raw_data[0] = src->RC[row][0];
 	dst_raw_data[1] = src->RC[row][1];
 	dst_raw_data[2] = src->RC[row][2];
@@ -68,28 +69,28 @@ void u3d_matrixCopyRowToVector(U3DVector_ptr dst, unsigned row, U3DMatrix_ptr sr
 }
 
 void u3d_matrixIdentity(U3DMatrix_ptr target){
-	target->M00 = 1.0;
-	target->M11 = 1.0;
-	target->M22 = 1.0;
-	target->M33 = 1.0;
+	target->M00 = 1.0f;
+	target->M11 = 1.0f;
+	target->M22 = 1.0f;
+	target->M33 = 1.0f;
 
-	target->M01 = 0.0;
-	target->M10 = 0.0;
+	target->M01 = 0.0f;
+	target->M10 = 0.0f;
 
-	target->M02 = 0.0;
-	target->M20 = 0.0;
+	target->M02 = 0.0f;
+	target->M20 = 0.0f;
 
-	target->M03 = 0.0;
-	target->M30 = 0.0;
+	target->M03 = 0.0f;
+	target->M30 = 0.0f;
 
-	target->M12 = 0.0;
-	target->M21 = 0.0;
+	target->M12 = 0.0f;
+	target->M21 = 0.0f;
 
-	target->M13 = 0.0;
-	target->M31 = 0.0;
+	target->M13 = 0.0f;
+	target->M31 = 0.0f;
 
-	target->M23 = 0.0;
-	target->M32 = 0.0;
+	target->M23 = 0.0f;
+	target->M32 = 0.0f;
 }
 
 void u3d_matrixMultiplication(U3DMatrix_ptr left, U3DMatrix_ptr right){
@@ -120,26 +121,26 @@ void u3d_matrixMultiplication2Matrix(U3DMatrix_ptr dst, U3DMatrix_ptr left, U3DM
 	dst->M33 = left->M30 * right->M03 + left->M31 * right->M13 + left->M32 * right->M23 + left->M33 * right->M33;
 }
 
-void u3d_matrixMultiplicationInRawData(number dst_raw_data[16], number left_raw_data[16], number right_raw_data[16]){
-	dst_raw_data[0] = left_raw_data[0] * right_raw_data[0] + left_raw_data[1] * right_raw_data[4] + left_raw_data[2] * right_raw_data[8] + left_raw_data[3] * right_raw_data[12];
-	dst_raw_data[1] = left_raw_data[0] * right_raw_data[1] + left_raw_data[1] * right_raw_data[5] + left_raw_data[2] * right_raw_data[9] + left_raw_data[3] * right_raw_data[13];
-	dst_raw_data[2] = left_raw_data[0] * right_raw_data[2] + left_raw_data[1] * right_raw_data[6] + left_raw_data[2] * right_raw_data[10] + left_raw_data[3] * right_raw_data[14];
-	dst_raw_data[3] = left_raw_data[0] * right_raw_data[3] + left_raw_data[1] * right_raw_data[7] + left_raw_data[2] * right_raw_data[11] + left_raw_data[3] * right_raw_data[15];
+void u3d_matrixMultiplicationInRawData(float dst_raw_data[16], float left_raw_data[16], float right_raw_data[16]){
+	dst_raw_data[RC00] = left_raw_data[RC00] * right_raw_data[RC00] + left_raw_data[RC01] * right_raw_data[RC10] + left_raw_data[RC02] * right_raw_data[RC20] + left_raw_data[RC03] * right_raw_data[RC30];
+	dst_raw_data[RC01] = left_raw_data[RC00] * right_raw_data[RC01] + left_raw_data[RC01] * right_raw_data[RC11] + left_raw_data[RC02] * right_raw_data[RC21] + left_raw_data[RC03] * right_raw_data[RC31];
+	dst_raw_data[RC02] = left_raw_data[RC00] * right_raw_data[RC02] + left_raw_data[RC01] * right_raw_data[RC12] + left_raw_data[RC02] * right_raw_data[RC22] + left_raw_data[RC03] * right_raw_data[RC32];
+	dst_raw_data[RC03] = left_raw_data[RC00] * right_raw_data[RC03] + left_raw_data[RC01] * right_raw_data[RC13] + left_raw_data[RC02] * right_raw_data[RC23] + left_raw_data[RC03] * right_raw_data[RC33];
 
-	dst_raw_data[4] = left_raw_data[4] * right_raw_data[0] + left_raw_data[5] * right_raw_data[4] + left_raw_data[6] * right_raw_data[8] + left_raw_data[7] * right_raw_data[12];
-	dst_raw_data[5] = left_raw_data[4] * right_raw_data[1] + left_raw_data[5] * right_raw_data[5] + left_raw_data[6] * right_raw_data[9] + left_raw_data[7] * right_raw_data[13];
-	dst_raw_data[6] = left_raw_data[4] * right_raw_data[2] + left_raw_data[5] * right_raw_data[6] + left_raw_data[6] * right_raw_data[10] + left_raw_data[7] * right_raw_data[14];
-	dst_raw_data[7] = left_raw_data[4] * right_raw_data[3] + left_raw_data[5] * right_raw_data[7] + left_raw_data[6] * right_raw_data[11] + left_raw_data[7] * right_raw_data[15];
+	dst_raw_data[RC10] = left_raw_data[RC10] * right_raw_data[RC00] + left_raw_data[RC11] * right_raw_data[RC10] + left_raw_data[RC12] * right_raw_data[RC20] + left_raw_data[RC13] * right_raw_data[RC30];
+	dst_raw_data[RC11] = left_raw_data[RC10] * right_raw_data[RC01] + left_raw_data[RC11] * right_raw_data[RC11] + left_raw_data[RC12] * right_raw_data[RC21] + left_raw_data[RC13] * right_raw_data[RC31];
+	dst_raw_data[RC12] = left_raw_data[RC10] * right_raw_data[RC02] + left_raw_data[RC11] * right_raw_data[RC12] + left_raw_data[RC12] * right_raw_data[RC22] + left_raw_data[RC13] * right_raw_data[RC32];
+	dst_raw_data[RC13] = left_raw_data[RC10] * right_raw_data[RC03] + left_raw_data[RC11] * right_raw_data[RC13] + left_raw_data[RC12] * right_raw_data[RC23] + left_raw_data[RC13] * right_raw_data[RC33];
 
-	dst_raw_data[8] = left_raw_data[8] * right_raw_data[0] + left_raw_data[9] * right_raw_data[4] + left_raw_data[10] * right_raw_data[8] + left_raw_data[11] * right_raw_data[12];
-	dst_raw_data[9] = left_raw_data[8] * right_raw_data[1] + left_raw_data[9] * right_raw_data[5] + left_raw_data[10] * right_raw_data[9] + left_raw_data[11] * right_raw_data[13];
-	dst_raw_data[10] = left_raw_data[8] * right_raw_data[2] + left_raw_data[9] * right_raw_data[6] + left_raw_data[10] * right_raw_data[10] + left_raw_data[11] * right_raw_data[14];
-	dst_raw_data[11] = left_raw_data[8] * right_raw_data[3] + left_raw_data[9] * right_raw_data[7] + left_raw_data[10] * right_raw_data[11] + left_raw_data[11] * right_raw_data[15];
+	dst_raw_data[RC20] = left_raw_data[RC20] * right_raw_data[RC00] + left_raw_data[RC21] * right_raw_data[RC10] + left_raw_data[RC22] * right_raw_data[RC20] + left_raw_data[RC23] * right_raw_data[RC30];
+	dst_raw_data[RC21] = left_raw_data[RC20] * right_raw_data[RC01] + left_raw_data[RC21] * right_raw_data[RC11] + left_raw_data[RC22] * right_raw_data[RC21] + left_raw_data[RC23] * right_raw_data[RC31];
+	dst_raw_data[RC22] = left_raw_data[RC20] * right_raw_data[RC02] + left_raw_data[RC21] * right_raw_data[RC12] + left_raw_data[RC22] * right_raw_data[RC22] + left_raw_data[RC23] * right_raw_data[RC32];
+	dst_raw_data[RC23] = left_raw_data[RC20] * right_raw_data[RC03] + left_raw_data[RC21] * right_raw_data[RC13] + left_raw_data[RC22] * right_raw_data[RC23] + left_raw_data[RC23] * right_raw_data[RC33];
 
-	dst_raw_data[12] = left_raw_data[12] * right_raw_data[0] + left_raw_data[13] * right_raw_data[4] + left_raw_data[14] * right_raw_data[8] + left_raw_data[15] * right_raw_data[12];
-	dst_raw_data[13] = left_raw_data[12] * right_raw_data[1] + left_raw_data[13] * right_raw_data[5] + left_raw_data[14] * right_raw_data[9] + left_raw_data[15] * right_raw_data[13];
-	dst_raw_data[14] = left_raw_data[12] * right_raw_data[2] + left_raw_data[13] * right_raw_data[6] + left_raw_data[14] * right_raw_data[10] + left_raw_data[15] * right_raw_data[14];
-	dst_raw_data[15] = left_raw_data[12] * right_raw_data[3] + left_raw_data[13] * right_raw_data[7] + left_raw_data[14] * right_raw_data[11] + left_raw_data[15] * right_raw_data[15];
+	dst_raw_data[RC30] = left_raw_data[RC30] * right_raw_data[RC00] + left_raw_data[RC31] * right_raw_data[RC10] + left_raw_data[RC32] * right_raw_data[RC20] + left_raw_data[RC33] * right_raw_data[RC30];
+	dst_raw_data[RC31] = left_raw_data[RC30] * right_raw_data[RC01] + left_raw_data[RC31] * right_raw_data[RC11] + left_raw_data[RC32] * right_raw_data[RC21] + left_raw_data[RC33] * right_raw_data[RC31];
+	dst_raw_data[RC32] = left_raw_data[RC30] * right_raw_data[RC02] + left_raw_data[RC31] * right_raw_data[RC12] + left_raw_data[RC32] * right_raw_data[RC22] + left_raw_data[RC33] * right_raw_data[RC32];
+	dst_raw_data[RC33] = left_raw_data[RC30] * right_raw_data[RC03] + left_raw_data[RC31] * right_raw_data[RC13] + left_raw_data[RC32] * right_raw_data[RC23] + left_raw_data[RC33] * right_raw_data[RC33];
 }
 
 void u3d_matrixTranspose(U3DMatrix_ptr target){
@@ -173,27 +174,27 @@ void u3d_matrixTranspose2Matrix(U3DMatrix_ptr dst, U3DMatrix_ptr src){
 	dst->M32 = src->M23;
 }
 
-void u3d_matrixTransposeInRawData(number dst_raw_data[16], number src_raw_data[16]){
-	dst_raw_data[0] = src_raw_data[0];
-	dst_raw_data[5] = src_raw_data[5];
-	dst_raw_data[10] = src_raw_data[10];
-	dst_raw_data[15] = src_raw_data[15];
+void u3d_matrixTransposeInRawData(float dst_raw_data[16], float src_raw_data[16]){
+	dst_raw_data[RC00] = src_raw_data[RC00];
+	dst_raw_data[RC11] = src_raw_data[RC11];
+	dst_raw_data[RC22] = src_raw_data[RC22];
+	dst_raw_data[RC33] = src_raw_data[RC33];
 
-	dst_raw_data[1] = src_raw_data[4];
-	dst_raw_data[4] = src_raw_data[1];
+	dst_raw_data[RC01] = src_raw_data[RC10];
+	dst_raw_data[RC10] = src_raw_data[RC01];
 
-	dst_raw_data[2] = src_raw_data[8];
-	dst_raw_data[8] = src_raw_data[2];
+	dst_raw_data[RC02] = src_raw_data[RC20];
+	dst_raw_data[RC20] = src_raw_data[RC02];
 
-	dst_raw_data[3] = src_raw_data[12];
-	dst_raw_data[12] = src_raw_data[3];
+	dst_raw_data[RC03] = src_raw_data[RC30];
+	dst_raw_data[RC30] = src_raw_data[RC03];
 
-	dst_raw_data[6] = src_raw_data[9];
-	dst_raw_data[9] = src_raw_data[6];
+	dst_raw_data[RC12] = src_raw_data[RC21];
+	dst_raw_data[RC21] = src_raw_data[RC12];
 
-	dst_raw_data[7] = src_raw_data[13];
-	dst_raw_data[13] = src_raw_data[7];
+	dst_raw_data[RC13] = src_raw_data[RC31];
+	dst_raw_data[RC31] = src_raw_data[RC13];
 
-	dst_raw_data[11] = src_raw_data[14];
-	dst_raw_data[14] = src_raw_data[11];
+	dst_raw_data[RC23] = src_raw_data[RC32];
+	dst_raw_data[RC32] = src_raw_data[RC23];
 }
