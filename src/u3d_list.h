@@ -9,8 +9,8 @@ typedef struct _U3DNode {
 	struct _U3DNode *nxt;
 } U3DNode, *U3DNode_ptr, U3DList, *U3DList_ptr;
 
-void u3d_listAddNode(U3DNode_ptr target, void *data);
-void u3d_listDelNode(U3DNode_ptr target, void *data);
+void u3d_listAddNode(U3DList_ptr target, void *data);
+void u3d_listDelNode(U3DList_ptr target, void *data);
 
 
 #endif

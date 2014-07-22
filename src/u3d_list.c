@@ -2,7 +2,7 @@
 #include "u3d_new.h"
 
 
-void u3d_listAddNode(U3DNode_ptr target, void *data){
+void u3d_listAddNode(U3DList_ptr target, void *data){
 	U3DNode_ptr node = u3d_newNode();
 	node->data = data;
 
@@ -12,7 +12,7 @@ void u3d_listAddNode(U3DNode_ptr target, void *data){
 	node->nxt = target;
 }
 
-void u3d_listDelNode(U3DNode_ptr target, void *data){
+void u3d_listDelNode(U3DList_ptr target, void *data){
 
 }
 
