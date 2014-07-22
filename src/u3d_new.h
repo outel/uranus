@@ -6,6 +6,7 @@
 #include "u3d_camera.h"
 #include "u3d_context.h"
 #include "u3d_list.h"
+#include "u3d_object.h"
 
 
 U3DCamera_ptr	u3d_newCamera(U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector, float fovx, float near_clip_plane, float far_clip_plane, float view_port_width, float view_port_height);
@@ -21,6 +22,7 @@ U3DVector_ptr	u3d_newVector(float x, float y, float z);
 U3DPoint_ptr	u3d_newPoint(float x, float y, float z);
 U3DList_ptr		u3d_newList();
 U3DNode_ptr		u3d_newNode();
+U3DObject_ptr	u3d_newObject();
 
 
 #endif

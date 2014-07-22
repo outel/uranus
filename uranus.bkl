@@ -17,5 +17,6 @@ program main {
 		src/u3d_new.c
 		src/u3d_utils.c
 		src/u3d_vector.c
+		src/u3d_object.c
 	}
 }

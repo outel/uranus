@@ -4,5 +4,6 @@
 
 
 void u3d_contextEnterFrame(U3DContext_ptr context){
-	u3d_renderDrawLine(0.0f, 0.0f, 100.0f, 100.0f);
+	U3DNode_ptr nxt = context->display_list.nxt;
+	u3d_renderDrawLine();
 }

@@ -16,7 +16,9 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 					_In_opt_ HINSTANCE hPrevInstance,
 					_In_ LPTSTR    lpCmdLine,
 					_In_ int       nCmdShow){
-	float box[] = {
+	MSG msg;
+	FILE *f;
+	float vertex[] = {
 		1, 1, 1, 1,
 		1, -1, 1, 1,
 		-1, -1, 1, 1,
@@ -26,20 +28,31 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		-1, -1, -1, 1,
 		-1, 1, -1, 1
 	};
-	MSG msg;
-	FILE *f;
+	unsigned index[] = {
+		0, 1, 2,
+		0, 2, 3,
+		4, 5, 6,
+		4, 6, 7,
+		0, 1, 5,
+		0, 5, 4,
+		3, 2, 6,
+		3, 6, 7,
+		0, 4, 7,
+		0, 7, 3,
+		1, 5, 6,
+		1, 6, 2
+	};	
 	U3DPoint point_at = {0.0f, 0.0f, 0.0f, 1.0f};
 	U3DPoint point_to = {0.0f, 0.0f, 1.0f, 1.0f};
 	U3DVector up_vector = {0.0f, 1.0f, 0.0f, 0.0f};
-
+	U3DObject object;
+	u3d_makeObject(&object, vertex, index);
 
 	u3d_makeContext(&context, 0.0f, 1.0f / 24.0f);
 	u3d_makeCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 400, 400);
 	u3d_makeList(&context.display_list);
 
-	u3d_listAddNode(&context.display_list, NULL);
-	u3d_listAddNode(&context.display_list, NULL);
-	u3d_listAddNode(&context.display_list, NULL);
+	u3d_listAddNode(&context.display_list, &object);
 
 	u3d_cameraExportMatrix4Camera(&context.camera);
 

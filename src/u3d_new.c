@@ -179,3 +179,7 @@ U3DList_ptr	u3d_newList(){
 U3DNode_ptr	u3d_newNode(){
 	return (U3DNode_ptr) malloc(sizeof(U3DNode));
 }
+
+U3DObject_ptr u3d_newObject(){
+		return (U3DObject_ptr) malloc(sizeof(U3DObject));
+}

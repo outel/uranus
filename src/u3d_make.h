@@ -6,6 +6,7 @@
 #include "u3d_matrix.h"
 #include "u3d_vector.h"
 #include "u3d_list.h"
+#include "u3d_object.h"
 
 
 void u3d_makeCamera(U3DCamera_ptr target, U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector, float fovx, float near_clip_plane, float far_clip_plane, float view_port_width, float view_port_height);
@@ -18,6 +19,7 @@ void u3d_makeMatrix4Screen(U3DMatrix_ptr target, float view_port_width, float  v
 void u3d_makeMatrix4Translation(U3DMatrix_ptr target, float tx, float ty, float tz);
 void u3d_makeMatrix4UVN(U3DMatrix_ptr target, U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector);
 void u3d_makeList(U3DList_ptr target);
+void u3d_makeObject(U3DObject_ptr target, float *vertex, unsigned *index);
 
 
 #endif

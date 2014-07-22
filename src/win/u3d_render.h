@@ -13,7 +13,7 @@ extern "C" {
 
 
 void u3d_renderInit(HWND hWnd);
-void u3d_renderDrawLine(float p0x, float p0y, float p1x, float p1y);
+void u3d_renderDrawLine();
 
 
 #ifdef __cplusplus
