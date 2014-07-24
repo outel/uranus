@@ -13,7 +13,7 @@ extern "C" {
 
 
 void u3d_renderInit(HWND hWnd);
-void u3d_renderDrawLine();
+void u3d_renderDrawLine(float *vertex_raw_data, unsigned *index_raw_data, unsigned length);
 
 
 #ifdef __cplusplus

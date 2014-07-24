@@ -4,6 +4,7 @@ HINSTANCE hInst;
 HWND hWnd;
 
 U3DContext context;
+int lock = 0;
 
 TCHAR szTitle[MAX_LOADSTRING];
 TCHAR szWindowClass[MAX_LOADSTRING];
@@ -28,6 +29,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		-1, -1, -1, 1,
 		-1, 1, -1, 1
 	};
+	float a[32], b[32], c[32];
 	unsigned index[] = {
 		0, 1, 2,
 		0, 2, 3,
@@ -47,9 +49,12 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	U3DVector up_vector = {0.0f, 1.0f, 0.0f, 0.0f};
 	U3DObject object;
 	u3d_makeObject(&object, vertex, index);
+	object.vertex_raw_data4world = a;
+	object.vertex_raw_data4camera = b;
+	object.vertex_raw_data4final = c;
 
 	u3d_makeContext(&context, 0.0f, 1.0f / 24.0f);
-	u3d_makeCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 400, 400);
+	u3d_makeCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 962, 518);
 	u3d_makeList(&context.display_list);
 
 	u3d_listAddNode(&context.display_list, &object);
@@ -134,7 +139,12 @@ LRESULT CALLBACK windowHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				}
 			break;
 		case WM_PAINT:
-			u3d_contextEnterFrame(&context);
+			if(0 == lock){
+				lock = 1;
+				u3d_contextEnterFrame(&context);
+				lock = 0;
+			}
+			
 			break;
 		case WM_DESTROY:
 			PostQuitMessage(0);

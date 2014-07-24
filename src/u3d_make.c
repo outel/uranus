@@ -143,6 +143,6 @@ void u3d_makeList(U3DList_ptr target){
 }
 
 void u3d_makeObject(U3DObject_ptr target, float *vertex, unsigned *index){
-	target->vertex = vertex;
-	target->index = index;
+	target->vertex_raw_data = vertex;
+	target->index_raw_data = index;
 }
