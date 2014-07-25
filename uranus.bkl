@@ -9,6 +9,7 @@ program main {
 		src/win/u3d_platform.cpp
 		src/win/u3d_render.cpp
 		
+		src/u3d_array.c
 		src/u3d_camera.c
 		src/u3d_context.c
 		src/u3d_list.c
