@@ -1,18 +1,18 @@
 ﻿
 #include "u3d_camera.h"
-#include "u3d_make.h"
+#include "u3d_init.h"
 
 
 
 void u3d_cameraExportMatrix4Camera(U3DCamera_ptr camera){
 	if(0 < camera->camera_matrix_invalid){
 		U3DMatrix temp;
-		u3d_makeMatrix4UVN(&camera->camera_matrix, &camera->point_at, &camera->point_to, &camera->up_vector);
+		u3d_initMatrix4UVN(&camera->camera_matrix, &camera->point_at, &camera->point_to, &camera->up_vector);
 		
-		u3d_makeMatrix4Translation(&temp, camera->tx, camera->ty, camera->tz);
+		u3d_initMatrix4Translation(&temp, camera->tx, camera->ty, camera->tz);
 		u3d_matrixMultiplication(&camera->camera_matrix, &temp);
 
-		u3d_makeMatrix4Rotation(&temp, camera->rx_deg, camera->ry_deg, camera->rz_deg);
+		u3d_initMatrix4Rotation(&temp, camera->rx_deg, camera->ry_deg, camera->rz_deg);
 		u3d_matrixMultiplication(&camera->camera_matrix, &temp);
 		
 		camera->camera_matrix_invalid = 0;
@@ -21,7 +21,7 @@ void u3d_cameraExportMatrix4Camera(U3DCamera_ptr camera){
 
 void u3d_cameraExportMatrix4Projection(U3DCamera_ptr camera){
 	if(0 < camera->projection_matrix_invalid){
-		u3d_makeMatrix4Projection(&camera->projection_matrix, camera->fovx_deg, camera->aspect_ratio, camera->near_clip_plane, camera->far_clip_plane);
+		u3d_initMatrix4Projection(&camera->projection_matrix, camera->fovx_deg, camera->aspect_ratio, camera->near_clip_plane, camera->far_clip_plane);
 		
 		camera->projection_matrix_invalid = 0;
 	}
@@ -29,7 +29,7 @@ void u3d_cameraExportMatrix4Projection(U3DCamera_ptr camera){
 
 void u3d_cameraExportMatrix4Screen(U3DCamera_ptr camera){
 	if(0 < camera->screen_matrix_invalid){
-		u3d_makeMatrix4Screen(&camera->screen_matrix, camera->view_port_width, camera->view_port_height);
+		u3d_initMatrix4Screen(&camera->screen_matrix, camera->view_port_width, camera->view_port_height);
 		
 		camera->screen_matrix_invalid = 0;
 	}

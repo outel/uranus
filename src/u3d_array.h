@@ -2,17 +2,16 @@
 #define U3D_ARRAY_H
 
 
-typedef struct _U3DArray4float {
+typedef struct _U3DArrayf {
 	float		*raw_data;
 	unsigned	lenght;
-} U3DArray4float, *U3DArray4float_ptr;
+} U3DArrayf, *U3DArrayf_ptr;
 
 
-
-
-typedef struct _U3DArray4unsigned {
+typedef struct _U3DArrayu {
 	unsigned	*raw_data;
 	unsigned	lenght;
-} U3DArray4unsigned, *U3DArray4unsigned_ptr;
+} U3DArrayu, *U3DArrayu_ptr;
+
 
 #endif

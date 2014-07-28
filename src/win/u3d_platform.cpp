@@ -29,7 +29,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		-1, -1, -1, 1,
 		-1, 1, -1, 1
 	};
-	float a[32], b[32], c[32];
+	
 	unsigned index[] = {
 		0, 1, 2,
 		0, 2, 3,
@@ -48,14 +48,14 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	U3DPoint point_to = {0.0f, 0.0f, 1.0f, 1.0f};
 	U3DVector up_vector = {0.0f, 1.0f, 0.0f, 0.0f};
 	U3DObject object;
-	u3d_makeObject(&object, vertex, index);
-	object.vertex_raw_data4world = a;
-	object.vertex_raw_data4camera = b;
-	object.vertex_raw_data4final = c;
+	u3d_initObject(&object, vertex, index);
+	u3d_initArrayf(&object.vertex_raw_data4world, 32);
+	u3d_initArrayf(&object.vertex_raw_data4camera, 32);
+	u3d_initArrayf(&object.vertex_raw_data4final, 32);
 
-	u3d_makeContext(&context, 0.0f, 1.0f / 24.0f);
-	u3d_makeCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 962, 518);
-	u3d_makeList(&context.display_list);
+	u3d_initContext(&context, 0.0f, 1.0f / 24.0f);
+	u3d_initCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 962, 518);
+	u3d_initList(&context.display_list);
 
 	u3d_listAddNode(&context.display_list, &object);
 
