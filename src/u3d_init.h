@@ -19,7 +19,7 @@ U3DMatrix_ptr	u3d_initMatrix4Screen(U3DMatrix_ptr target, float view_port_width,
 U3DMatrix_ptr	u3d_initMatrix4Translation(U3DMatrix_ptr target, float tx, float ty, float tz);
 U3DMatrix_ptr	u3d_initMatrix4UVN(U3DMatrix_ptr target, U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector);
 U3DList_ptr		u3d_initList(U3DList_ptr target);
-U3DObject_ptr	u3d_initObject(U3DObject_ptr target, float *vertex, unsigned *index);
+U3DObject_ptr	u3d_initObject(U3DObject_ptr target, unsigned lenght);
 U3DArrayf_ptr	u3d_initArrayf(U3DArrayf_ptr target, unsigned lenght);
 U3DArrayu_ptr	u3d_initArrayu(U3DArrayu_ptr target, unsigned lenght);
 

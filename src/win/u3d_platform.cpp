@@ -19,18 +19,22 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 					_In_ int       nCmdShow){
 	MSG msg;
 	FILE *f;
-	float vertex[] = {
-		1, 1, 1, 1,
-		1, -1, 1, 1,
-		-1, -1, 1, 1,
-		-1, 1, 1, 1,
-		1, 1, -1, 1,
-		1, -1, -1, 1,
-		-1, -1, -1, 1,
-		-1, 1, -1, 1
+	float vertex_raw_data[32] = {
+		1.0f, 1.0f, 1.0f, 1.0f,
+		1.0f, -1.0f, 1.0f, 1.0f,
+		-1.0f, -1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, -1.0f, 1.0f,
+		1.0f, -1.0f, -1.0f, 1.0f,
+		-1.0f, -1.0f, -1.0f, 1.0f,
+		-1.0f, 1.0f, -1.0f, 1.0f
+	};
+	U3DArrayf vertex = {
+		vertex_raw_data,
+		32
 	};
 	
-	unsigned index[] = {
+	unsigned index_raw_data[36] = {
 		0, 1, 2,
 		0, 2, 3,
 		4, 5, 6,
@@ -43,15 +47,20 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		0, 7, 3,
 		1, 5, 6,
 		1, 6, 2
+	};
+	U3DArrayu index = {
+		index_raw_data,
+		36
 	};	
 	U3DPoint point_at = {0.0f, 0.0f, 0.0f, 1.0f};
 	U3DPoint point_to = {0.0f, 0.0f, 1.0f, 1.0f};
 	U3DVector up_vector = {0.0f, 1.0f, 0.0f, 0.0f};
+
 	U3DObject object;
-	u3d_initObject(&object, vertex, index);
-	u3d_initArrayf(&object.vertex_raw_data4world, 32);
-	u3d_initArrayf(&object.vertex_raw_data4camera, 32);
-	u3d_initArrayf(&object.vertex_raw_data4final, 32);
+	u3d_initObject(&object, vertex.lenght);
+	object.vertex_raw_data = vertex;
+	object.index_raw_data = index;
+
 
 	u3d_initContext(&context, 0.0f, 1.0f / 24.0f);
 	u3d_initCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 962, 518);

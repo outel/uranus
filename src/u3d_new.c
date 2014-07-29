@@ -8,7 +8,7 @@ U3DCamera_ptr u3d_newCamera(){
 	return (U3DCamera_ptr) malloc(sizeof(U3DCamera));
 }
 
-U3DContext_ptr	u3d_newContext(){
+U3DContext_ptr u3d_newContext(){
 	return (U3DContext_ptr) malloc(sizeof(U3DContext));
 }
 
@@ -24,11 +24,11 @@ U3DPoint_ptr u3d_newPoint(){
 	return (U3DPoint_ptr) malloc(sizeof(U3DPoint));
 }
 
-U3DList_ptr	u3d_newList(){
+U3DList_ptr u3d_newList(){
 	return (U3DList_ptr) malloc(sizeof(U3DList));
 }
 
-U3DNode_ptr	u3d_newNode(){
+U3DNode_ptr u3d_newNode(){
 	return (U3DNode_ptr) malloc(sizeof(U3DNode));
 }
 

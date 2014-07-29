@@ -162,9 +162,10 @@ U3DList_ptr u3d_initList(U3DList_ptr target){
 	return target;
 }
 
-U3DObject_ptr u3d_initObject(U3DObject_ptr target, float *vertex, unsigned *index){
-	u3d_initArrayf(&target->vertex_raw_data);
-	u3d_initArrayu(&target->index_raw_data);
+U3DObject_ptr u3d_initObject(U3DObject_ptr target, unsigned vertex_lenght){
+	u3d_initArrayf(&target->vertex_raw_data4world, vertex_lenght);
+	u3d_initArrayf(&target->vertex_raw_data4camera, vertex_lenght);
+	u3d_initArrayf(&target->vertex_raw_data4final, vertex_lenght);
 
 	return target;
 }
