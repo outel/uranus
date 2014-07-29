@@ -60,7 +60,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	u3d_initObject(&object, vertex.lenght);
 	object.vertex_raw_data = vertex;
 	object.index_raw_data = index;
-
+	u3d_objectMoveTo(&object, 0.0f, 0.0f, 5.0f);
+	s3d_objectRotateTo(&object, 20.0f, 30.0f, 40.0f);
 
 	u3d_initContext(&context, 0.0f, 1.0f / 24.0f);
 	u3d_initCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 962, 518);

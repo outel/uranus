@@ -1,4 +1,5 @@
 ﻿#include <math.h>
+#include <stdlib.h>
 
 #include "u3d_setup.h"
 #include "u3d_context.h"
@@ -166,6 +167,13 @@ U3DObject_ptr u3d_initObject(U3DObject_ptr target, unsigned vertex_lenght){
 	u3d_initArrayf(&target->vertex_raw_data4world, vertex_lenght);
 	u3d_initArrayf(&target->vertex_raw_data4camera, vertex_lenght);
 	u3d_initArrayf(&target->vertex_raw_data4final, vertex_lenght);
+
+	target->x = target->y = target->z = 0.0f;
+	target->rx_deg = target->ry_deg = target->rz_deg = 0.0f;
+	target->sx = target->sy = target->sz = 1.0f;
+
+	target->object_matrix_invalid = 1;
+	target->world_matrix_invalid = 1;
 
 	return target;
 }

@@ -9,18 +9,17 @@
 
 
 void u3d_contextEnterFrame(U3DContext_ptr context){
-	U3DMatrix m_world = {
-		1.0, 0.0, 0.0, 0.0,
-		0.0, 1.0, 0.0, 0.0,
-		0.0, 0.0, 1.0, 0.0,
-		0.0, 0.0, 5.0, 1.0
-	};
+	U3DMatrix m_world;
 	U3DNode_ptr nxt = context->display_list.nxt;
 	U3DObject_ptr obj;
 
 	while(nxt != &context->display_list){
 		obj = (U3DObject_ptr)nxt->data;
 
+		u3d_matrixIdentity(&m_world);
+		u3d_objectExportMatrix4Object(obj);
+		u3d_objectExportMatrix4World(obj);
+		u3d_matrixMultiplication2Matrix(&m_world, &obj->object_matrix, &obj->world_matrix);
 		u3d_utilsBatchMatrixMultiplication(obj->vertex_raw_data4world.raw_data, obj->vertex_raw_data.raw_data, 32, m_world.M, 4);
 		
 		u3d_cameraExportMatrix4Camera(&context->camera);

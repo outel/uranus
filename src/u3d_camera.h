@@ -5,7 +5,6 @@
 #include "u3d_matrix.h"
 
 
-
 typedef struct _U3DCamera {
 	U3DPoint	point_at;
 	U3DPoint	point_to;
