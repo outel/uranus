@@ -32,8 +32,8 @@ void u3d_contextEnterFrame(U3DContext_ptr context){
 		u3d_cameraExportMatrix4Screen(&context->camera);
 		u3d_utilsBatchMatrixMultiplication(obj->vertex_raw_data4final.raw_data, obj->vertex_raw_data4final.raw_data, 32, context->camera.screen_matrix.M, 4);
 
+		u3d_renderDrawLine(obj->vertex_raw_data4final.raw_data, obj->index_raw_data.raw_data, 36);
+
 		nxt = nxt->nxt;
 	}
-
-	u3d_renderDrawLine(obj->vertex_raw_data4final.raw_data, obj->index_raw_data.raw_data, 36);
 }
