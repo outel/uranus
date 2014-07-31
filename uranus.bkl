@@ -1,8 +1,9 @@
 toolsets = vs2012;
-win32-subsystem = windows;
-win32-unicode = true;
+
 
 program main {
+	win32-subsystem = windows;
+	win32-unicode = true;
 	libs += d2d1;
 
 	sources {
@@ -19,5 +20,14 @@ program main {
 		src/u3d_utils.c
 		src/u3d_vector.c
 		src/u3d_object.c
+	}
+}
+
+program test {
+	win32-subsystem = console;
+	win32-unicode = false;
+	
+	sources {
+		test/test.c
 	}
 }
