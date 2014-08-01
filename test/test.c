@@ -10,19 +10,7 @@ int main(int argc, char **argv){
 	if(0 == fopen_s(&file, "D:\\\\a.obj", "r")){
 
 		while(0 == feof(file)){
-			sz = fread_s(buf, 1024, sizeof(char), 1024, file);
-			printf("%s", buf);
-			sz = fread_s(buf, 12, sizeof(char), 3, file);
-			printf("%.1f", atof(buf));
-			fseek(file, 1, SEEK_CUR);
-			sz = fread_s(buf, 12, sizeof(char), 3, file);
-			printf(" %.1f", atof(buf));
-			fseek(file, 1, SEEK_CUR);
-			sz = fread_s(buf, 12, sizeof(char), 3, file);
-			printf(" %.1f\n", atof(buf));
-			fseek(file, 2, SEEK_CUR);
-
-			memset(buf, 0, 12);
+			fgets(buf, 1024, file);
 		}
 
 		fclose(file);
