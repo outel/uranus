@@ -2,8 +2,23 @@
 #define U3D_MATRIX_H
 
 #include "u3d_vector.h"
-#include "u3d_setup.h"
 
+#define RC00	0
+#define RC01	1
+#define RC02	2
+#define RC03	3
+#define RC10	4
+#define RC11	5
+#define RC12	6
+#define RC13	7
+#define RC20	8
+#define RC21	9
+#define RC22	10
+#define RC23	11
+#define RC30	12
+#define RC31	13
+#define RC32	14
+#define RC33	15
 
 typedef struct _U3DMatrix {
 	union {
@@ -17,6 +32,18 @@ typedef struct _U3DMatrix {
 		};
 	};
 } U3DMatrix, *U3DMatrix_ptr;
+
+U3DMatrix_ptr	u3d_matrixCreate();
+U3DMatrix_ptr	u3d_matrixConstructDefault(U3DMatrix_ptr target);
+U3DMatrix_ptr	u3d_matrixConstruct(U3DMatrix_ptr target, float src_raw_data[16]);
+U3DMatrix_ptr	u3d_matrixConstruct4Projection(U3DMatrix_ptr target, float fovx_deg, float aspect_ratio, float near_clip_plane, float far_clip_plane);
+U3DMatrix_ptr	u3d_matrixConstruct4Rotation(U3DMatrix_ptr target, float rx_deg, float ry_deg, float rz_deg);
+U3DMatrix_ptr	u3d_matrixConstruct4Scale(U3DMatrix_ptr target, float sx, float sy, float sz);
+U3DMatrix_ptr	u3d_matrixConstruct4Screen(U3DMatrix_ptr target, float view_port_width, float  view_port_height);
+U3DMatrix_ptr	u3d_matrixConstruct4Translation(U3DMatrix_ptr target, float tx, float ty, float tz);
+U3DMatrix_ptr	u3d_matrixConstruct4UVN(U3DMatrix_ptr target, U3DPoint_ptr point_at, U3DPoint_ptr point_to, U3DVector_ptr up_vector);
+U3DMatrix_ptr	u3d_matrixDestruct(U3DMatrix_ptr target);
+void			u3d_matrixDelete(U3DMatrix_ptr target);
 
 void u3d_matrixCopyColumnFromRawData(U3DMatrix_ptr dst, unsigned column, float src_raw_data[4]);
 void u3d_matrixCopyColumnFromVector(U3DMatrix_ptr dst, unsigned column, U3DVector_ptr src);

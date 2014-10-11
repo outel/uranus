@@ -15,6 +15,13 @@ typedef struct _U3DContext {
 	U3DList display_list;
 } U3DContext, *U3DContext_ptr;
 
+U3DContext_ptr	u3d_contextCreate();
+U3DContext_ptr	u3d_contextConstructDefault(U3DContext_ptr target);
+U3DContext_ptr	u3d_contextConstruct(U3DContext_ptr target, float cumulative_time, float frame_rate);
+U3DContext_ptr	u3d_contextDestruct(U3DContext_ptr target);
+void			u3d_contextDelete(U3DContext_ptr target);
+
+
 void u3d_contextEnterFrame(U3DContext_ptr context);
 
 

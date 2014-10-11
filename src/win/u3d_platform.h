@@ -18,8 +18,7 @@ extern "C" {
 
 
 #include "../u3d_context.h"
-#include "../u3d_init.h"
-#include "../u3d_new.h"
+#include "../u3d_object.h"
 #include "../u3d_array.h"
 
 

@@ -24,6 +24,14 @@ typedef struct _U3DObject {
 	unsigned	world_matrix_invalid;
 } U3DObject, *U3DObject_ptr;
 
+
+U3DObject_ptr	u3d_objectCreate();
+U3DObject_ptr	u3d_objectConstructDefault(U3DObject_ptr target);
+U3DObject_ptr	u3d_objectDestruct(U3DObject_ptr target);
+void			u3d_objectDelete(U3DObject_ptr target);
+
+void u3d_objectCopyVertexRawData(U3DObject_ptr object, float *vertex_raw_data, unsigned raw_data_lenght);
+void u3d_objectCopyIndexRawData(U3DObject_ptr object, unsigned *index_raw_data, unsigned raw_data_lenght);
 void u3d_objectExportMatrix4Object(U3DObject_ptr object);
 void u3d_objectExportMatrix4World(U3DObject_ptr object);
 void u3d_objectMoveTo(U3DObject_ptr object, float x, float y, float z);

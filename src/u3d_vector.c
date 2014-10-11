@@ -1,6 +1,69 @@
 ﻿#include <math.h>
+#include <stdlib.h>
 
 #include "u3d_vector.h"
+
+
+U3DVector_ptr u3d_vectorCreate(){
+	return (U3DVector_ptr) malloc(sizeof(U3DVector));
+}
+
+U3DVector_ptr u3d_vectorConstructDefault(U3DVector_ptr target){
+	target->x = 0.0f;
+	target->y = 0.0f;
+	target->z = 0.0f;
+	target->w = 0.0f;
+
+	return target;
+}
+
+U3DVector_ptr u3d_vectorConstruct(U3DVector_ptr target, float x, float y, float z){
+	target->x = x;
+	target->y = y;
+	target->z = z;
+	target->w = 0.0f;
+
+	return target;
+}
+
+U3DVector_ptr u3d_vectorDestruct(U3DVector_ptr target){
+	return target;
+}
+
+void u3d_vectorDelete(U3DVector_ptr target){
+	free(target);
+}
+
+
+U3DPoint_ptr u3d_pointCreate(){
+	return (U3DPoint_ptr) malloc(sizeof(U3DPoint));
+}
+
+U3DPoint_ptr u3d_pointConstructDefault(U3DPoint_ptr target){
+	target->x = 0.0f;
+	target->y = 0.0f;
+	target->z = 0.0f;
+	target->w = 1.0f;
+	
+	return target;
+}
+
+U3DPoint_ptr u3d_pointConstruct(U3DPoint_ptr target, float x, float y, float z){
+	target->x = x;
+	target->y = y;
+	target->z = z;
+	target->w = 1.0f;
+	
+	return target;
+}
+
+U3DPoint_ptr u3d_pointDestruct(U3DPoint_ptr target){
+	return target;
+}
+
+void u3d_pointDelete(U3DPoint_ptr target){
+	free(target);
+}
 
 void u3d_vectorAddition(U3DVector_ptr left, U3DVector_ptr right){
 	left->x += right->x;

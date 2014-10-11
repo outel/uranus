@@ -19,8 +19,6 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 					_In_ int       nCmdShow){
 	MSG msg;
 	FILE *f;
-	FILE *abc;
-	char mm[30];
 	float vertex_raw_data[32] = {
 		1.0f, 1.0f, 1.0f, 1.0f,
 		1.0f, -1.0f, 1.0f, 1.0f,
@@ -61,33 +59,31 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	U3DObject object1;
 	U3DObject object2;
 
-	u3d_initObject(&object1, vertex.lenght);
-	object1.vertex_raw_data = vertex;
-	object1.index_raw_data = index;
+	AllocConsole();
+	f = freopen("CONOUT$", "w+t", stdout);
+
+	u3d_objectConstructDefault(&object1);
+	//object1.vertex_raw_data = vertex;
+	u3d_objectCopyVertexRawData(&object1, vertex_raw_data, 32);
+	//object1.index_raw_data = index;
+	u3d_objectCopyIndexRawData(&object1, index_raw_data, 36);
 	u3d_objectMoveTo(&object1, 2.0f, 0.0f, 6.0f);
 	s3d_objectRotateTo(&object1, 20.0f, 30.0f, 40.0f);
 
-	u3d_initObject(&object2, vertex.lenght);
-	object2.vertex_raw_data = vertex;
-	object2.index_raw_data = index;
+	u3d_objectConstructDefault(&object2);
+	//object2.vertex_raw_data = vertex;
+	u3d_objectCopyVertexRawData(&object2, vertex_raw_data, 32);
+	//object2.index_raw_data = index;
+	u3d_objectCopyIndexRawData(&object2, index_raw_data, 36);
 	u3d_objectMoveTo(&object2, -2.0f, 0.0f, 6.0f);
 	s3d_objectRotateTo(&object2, 20.0f, 30.0f, 40.0f);
 
-	u3d_initContext(&context, 0.0f, 1.0f / 24.0f);
-	u3d_initCamera(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 962, 518);
-	u3d_initList(&context.display_list);
+	u3d_contextConstruct(&context, 0.0f, 1.0f / 24.0f);
+	u3d_cameraConstruct(&context.camera, &point_at, &point_to, &up_vector, 90.0, 0.1, 1000, 962, 518);
+	u3d_listConstructDefault(&context.display_list);
 
 	u3d_listAddNode(&context.display_list, &object1);
 	u3d_listAddNode(&context.display_list, &object2);
-
-	AllocConsole();
-	f = freopen("CONOUT$", "w+t", stdout);
-	printf("%s\n", "Hello");
-
-	abc = fopen("D:\\\\abc", "r");
-	fread(mm, sizeof(char), 30, abc);
-	printf("%.25s\n", mm);
-	fclose(abc);
 
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
@@ -108,6 +104,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		DispatchMessage(&msg);
 	}
 	
+	u3d_contextDestruct(&context);
 	fclose(f);
 	FreeConsole();
 

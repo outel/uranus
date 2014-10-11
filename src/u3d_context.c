@@ -7,6 +7,35 @@
 #include "u3d_utils.h"
 
 
+U3DContext_ptr u3d_contextCreate(){
+	return (U3DContext_ptr) malloc(sizeof(U3DContext));
+}
+
+U3DContext_ptr u3d_contextConstructDefault(U3DContext_ptr target){
+	target->cumulative_time = 0.0f;
+	target->frame_rate = 1.0f / 60.0f;
+
+	u3d_cameraConstructDefault(&target->camera);
+
+	return target;
+}
+
+U3DContext_ptr u3d_contextConstruct(U3DContext_ptr target, float cumulative_time, float frame_rate){
+	target->cumulative_time = cumulative_time;
+	target->frame_rate = frame_rate;
+
+	return target;
+}
+
+U3DContext_ptr u3d_contextDestruct(U3DContext_ptr target){
+	u3d_cameraDestruct(&target->camera);
+
+	return target;
+}
+
+void u3d_contextDelete(U3DContext_ptr target){
+	free(target);
+}
 
 void u3d_contextEnterFrame(U3DContext_ptr context){
 	U3DMatrix m_world;

@@ -14,9 +14,7 @@ program main {
 		src/u3d_camera.c
 		src/u3d_context.c
 		src/u3d_list.c
-		src/u3d_init.c
 		src/u3d_matrix.c
-		src/u3d_new.c
 		src/u3d_utils.c
 		src/u3d_vector.c
 		src/u3d_object.c
